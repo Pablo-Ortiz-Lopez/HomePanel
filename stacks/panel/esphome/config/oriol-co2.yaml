@@ -1,0 +1,178 @@
+esphome:
+  name: "oriol-co2"
+  friendly_name: "Sensor de CO2 de Oriol"
+
+esp8266:
+  board: esp01_1m
+
+logger:
+  level: info
+  baud_rate: 0
+
+api:
+
+ota:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  ap:
+    ssid: "ESP-ROOM-V3"
+    password: !secret mqtt_password
+
+captive_portal:
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: "pablo"
+  password: !secret mqtt_password
+  id: mqtt_client
+
+uart:
+  rx_pin: GPIO3
+  tx_pin: GPIO1
+  baud_rate: 9600
+  
+sensor:
+  - platform: senseair
+    co2:
+      name: "co2"
+      id: co2
+    update_interval: 60s
+  
+  - platform: dht
+    pin: GPIO2
+    update_interval: 15s
+    temperature:
+      name: "Temperature"
+      id: temperature
+      accuracy_decimals: 1
+      filters:
+        offset: -2.5
+    humidity:
+      name: "Humidity"
+      id: humidity
+      accuracy_decimals: 1
+    
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    id: wifi_db
+    update_interval: 5s
+
+image:
+  - file: "images/x.png"
+    id: x_image
+    resize: 25x25
+    type: TRANSPARENT_IMAGE
+    
+font:
+  - file: "gfonts://Roboto"
+    id: roboto_small
+    size: 18
+    glyphs: ['!', '"', '%', '(', ')', '+', '=', ',', '-', '_', '.', ':', '°', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'à', 'è', 'é', 'í', 'ò', 'ó', 'ú', 'ï', 'ü', 'À', 'È', 'É', 'Í', 'Ò', 'Ó', 'Ú', 'Ï', 'Ü', '?']
+  - file: "gfonts://Roboto"
+    id: roboto
+    size: 25
+    glyphs: ['!', '"', '%', '(', ')', '+', '=', ',', '-', '_', '.', ':', '°', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'à', 'è', 'é', 'í', 'ò', 'ó', 'ú', 'ï', 'ü', 'À', 'È', 'É', 'Í', 'Ò', 'Ó', 'Ú', 'Ï', 'Ü', '?']
+  - file: "gfonts://Roboto"
+    id: roboto_big
+    size: 60
+    glyphs: ['!', '"', '%', '(', ')', '+', '=', ',', '-', '_', '.', ':', '°', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'à', 'è', 'é', 'í', 'ò', 'ó', 'ú', 'ï', 'ü', 'À', 'È', 'É', 'Í', 'Ò', 'Ó', 'Ú', 'Ï', 'Ü', '?']
+
+time:
+  - id: reloj
+    platform: sntp
+    timezone: Europe/Madrid
+
+spi:
+  clk_pin: GPIO14
+  mosi_pin: GPIO13
+
+display:
+  - platform: waveshare_epaper
+    id: eink
+    cs_pin: GPIO15
+    dc_pin: GPIO12
+    reset_pin: GPIO4
+    busy_pin: GPIO5
+    model: 1.54inv2
+    rotation: 270
+    full_update_every: 1
+    update_interval: 60s
+    reset_duration: 200ms
+    lambda: |-
+      auto time = id(reloj).now();
+      
+      it.printf(5, 5, id(roboto_small), TextAlign::TOP_LEFT, "IT-MEI");
+
+      if(time.is_valid()){
+        it.printf(70,0,id(roboto), TextAlign::TOP_LEFT, "%02d:%02d", time.hour, time.minute);
+      }
+
+      if(id(wifi_db).has_state()){ // WIFI OK
+        if (!id(mqtt_client)->is_connected()) { // MQTT KO
+          it.printf(175, 0, id(roboto), TextAlign::TOP_LEFT , "!");
+        }else{ // WIFI & MQTT OK
+          it.filled_rectangle(150, 20, 8, 5); // 1 Bar
+
+          if(id(wifi_db).has_state() && id(wifi_db).state > -80){ // 2 Bars
+            it.filled_rectangle(160, 15, 8, 10);
+          }else{
+            it.rectangle(160, 15, 8, 10);
+          }
+
+          if(id(wifi_db).has_state() && id(wifi_db).state > -70){ // 3 Bars
+            it.filled_rectangle(170, 10, 8, 15);
+          }else{
+            it.rectangle(170, 10, 8, 15);
+          }
+
+          if(id(wifi_db).has_state() && id(wifi_db).state > -60){ // 4 Bars
+            it.filled_rectangle(180, 5, 8, 20);
+          }else{
+            it.rectangle(180, 5, 8, 20);
+          }
+
+          if(id(wifi_db).has_state() && id(wifi_db).state > -50){ // 5 Bars
+            it.filled_rectangle(190, 0, 8, 25);
+          }else{
+            it.rectangle(190, 0, 8, 25);
+          }
+        }
+      }else{ // WIFI KO
+        it.image(175, 0, id(x_image));
+      }
+
+    
+      if (id(temperature).has_state()) { // Temperature
+        it.printf(0, 34, id(roboto), TextAlign::TOP_LEFT , "T: %.1f°", id(temperature).state);
+      }else{
+        it.printf(0, 34, id(roboto), TextAlign::TOP_LEFT , "T: --.-°");
+      }
+
+      if (id(humidity).has_state()) { // Humidity
+        it.printf(90, 34, id(roboto), TextAlign::TOP_LEFT , "H: %.1f%%", id(humidity).state);
+      }else{
+        it.printf(90, 34, id(roboto), TextAlign::TOP_LEFT , "H: --.-%%");
+      }
+
+      it.printf(0, 70, id(roboto), TextAlign::TOP_LEFT , "Nivell de CO2:");
+      
+      if (id(co2).has_state()) { // CO2
+        it.printf(0, 100, id(roboto_big), TextAlign::TOP_LEFT , "%.0f", id(co2).state);
+        if(id(co2).state < 800){
+          it.printf(0, 200, id(roboto), TextAlign::BOTTOM_LEFT , "Nivell Acceptable");
+        }else if(id(co2).state < 1500){
+          it.printf(0, 200, id(roboto_small), TextAlign::BOTTOM_LEFT , "Cognició reduïda");
+        }else if(id(co2).state < 5000){
+          it.printf(0, 200, id(roboto_small), TextAlign::BOTTOM_LEFT , "Ventilació necessària");
+        }else{
+          it.printf(0, 200, id(roboto), TextAlign::BOTTOM_LEFT , "> Límit legal");
+        }
+      }else{
+        it.printf(0, 100, id(roboto_big), TextAlign::TOP_LEFT , "---");
+        it.printf(0, 200, id(roboto_small), TextAlign::BOTTOM_LEFT , "Lectura no disponible");
+      }
+
+      it.printf(200, 130, id(roboto), TextAlign::TOP_RIGHT , "ppm");
