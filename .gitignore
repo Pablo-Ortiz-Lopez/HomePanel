@@ -1,0 +1,17 @@
+**/lowcode/.*
+**/ac-control-backups/*
+
+**/homeassistant/*
+!**/homeassistant/*.yaml
+
+secrets/*
+!secrets/.keep
+
+node_modules
+!.keep
+
+*-backups/*
+gerbers
+*.zip
+*.lck
+fp-info-cache

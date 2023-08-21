@@ -1,0 +1,151 @@
+esphome:
+  name: "thermostat"
+  friendly_name: "Termostato"
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+  level: NONE
+
+# Enable captive portal
+captive_portal:
+    
+# Enable over-the-air
+ota:
+
+api:
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: "pablo"
+  password: !secret mqtt_password
+  id: mqtt_client
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Thermostat"
+    password: !secret mqtt_password
+
+i2c:
+  sda: GPIO4
+  scl: GPIO5
+
+# Receive sensor data from mqtt
+sensor:
+  - platform: mqtt_subscribe
+    name: "Comedor Temperature"
+    id: temperature
+    topic: comedor-ac/sensor/comedor_temperature/state
+
+  - platform: mqtt_subscribe
+    name: "Comedor Humidity"
+    id: humidity
+    topic: comedor-ac/sensor/comedor_humidity/state
+    
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
+    id: wifi_db
+    update_interval: 10s
+
+switch:
+  - platform: gpio
+    pin: GPIO16
+    id: comedor_heater
+
+climate:
+  - platform: bang_bang
+    name: "Comedor Heater"
+    id: heater
+    sensor: temperature
+    default_target_temperature_low: 22 °C
+    default_target_temperature_high: 23 °C
+
+    heat_action:
+      - switch.turn_on: comedor_heater
+    idle_action:
+      - switch.turn_off: comedor_heater
+
+image:
+  - file: "images/fire.png"
+    id: fire_image
+    resize: 40x40
+    type: TRANSPARENT_IMAGE
+  - file: "images/x.png"
+    id: x_image
+    resize: 20x20
+    type: TRANSPARENT_IMAGE
+    
+font:
+  - file: "gfonts://Roboto"
+    id: roboto
+    size: 16
+  - file: "gfonts://Roboto"
+    id: roboto_big
+    size: 40
+
+display:
+-   platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    address: 0x3C
+    lambda: |-
+      if(id(wifi_db).has_state()){ // WIFI OK
+        if (!id(mqtt_client)->is_connected()) { // MQTT KO
+          it.printf(110, 0, id(roboto), TextAlign::TOP_LEFT , "!");
+        }else{ // WIFI & MQTT OK
+          it.filled_rectangle(99, 6, 5, 10); // 1 Bar
+
+          if(id(wifi_db).has_state() && id(wifi_db).state > -70){ // 2 Bars
+            it.filled_rectangle(106, 4, 5, 12);
+          }else{
+            it.rectangle(106, 4, 5, 12);
+          }
+
+          if(id(wifi_db).has_state() && id(wifi_db).state > -60){ // 3 Bars
+            it.filled_rectangle(113, 2, 5, 14);
+          }else{
+            it.rectangle(113, 2, 5, 14);
+          }
+
+          if(id(wifi_db).has_state() && id(wifi_db).state > -40){ // 4 Bars
+            it.filled_rectangle(120, 0, 7, 16);
+          }else{
+            it.rectangle(120, 0, 5, 16);
+          }
+        }
+      }else{ // WIFI KO
+        it.image(100, 0, id(x_image));
+      }
+      
+      if (id(temperature).has_state()) { // Temperature
+        it.printf(0, 0, id(roboto), TextAlign::TOP_LEFT , "%.1f°", id(temperature).state);
+      }else{
+        it.printf(0, 0, id(roboto), TextAlign::TOP_LEFT , "--.-°");
+      }
+
+      it.printf(38, 0, id(roboto), TextAlign::TOP_LEFT , "/");
+
+      if (id(humidity).has_state()) { // Humidity
+        it.printf(50, 0, id(roboto), TextAlign::TOP_LEFT , "%.1f%%", id(humidity).state);
+      }else{
+        it.printf(50, 0, id(roboto), TextAlign::TOP_LEFT , "--.-%%");
+      }
+      
+      if(id(heater).mode != 0){
+        it.printf(0, 25, id(roboto_big), TextAlign::TOP_LEFT , "%.1f°", id(heater).target_temperature_high);
+          
+      }else{
+        it.printf(0, 25, id(roboto_big), TextAlign::TOP_LEFT , "OFF");
+          
+      }
+      
+      if(id(heater).action == 3){
+        it.image(90, 25, id(fire_image));
+      }
+      
+      

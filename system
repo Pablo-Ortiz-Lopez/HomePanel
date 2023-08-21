@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# Builds (and pushes, optionally) a Docker image
+# Syntax: system (build/push) (image name) (build context)
+if [ "$1" = "build" ] || [ "$1" = "push" ]; then
+	if [ "$1" = "push" ];then
+		pushArg="--push"
+	fi
+	docker login registry.gitlab.com -u pabloortiz132@gmail.com -p $(cat secrets/pushtoken.key)
+	DOCKER_BUILDKIT=1 docker buildx build \
+		$pushArg \
+		--platform linux/arm/v7,linux/amd64 \
+		--tag registry.gitlab.com/pabloortiz132/pablo-platform/$2:latest \
+		$3
+	exit
+fi
+
+# Sets up the host computer to work with the project, if using an Ubuntu based Linux distribution.
+if [ "$1" = "setup-ubuntu" ]; then
+	# Install docker if missing
+	if ! which docker &>/dev/null ; then
+		echo -e "\e[0;93m⚠️  Missing docker package. Installing...\e[0m"
+		sudo curl -sSL https://get.docker.com | sudo sh
+		sudo groupadd docker
+		sudo usermod -aG docker $USER
+		sudo newgrp docker
+	fi
+
+	echo "Setup done."
+	exit
+fi
+
+ttyMode="-ti" # By default, create an interactive tty to show logs.
+
+# Option to detach from logs, useful for CI
+if [ "$CI_MODE" = "1" ] ; then
+    echo -e "\e[1;34mUsing CI mode. \e[0m"
+    if [[ "$2" = "start" ]]; then
+        ttyMode="-d"
+    else
+        ttyMode=""
+    fi
+fi
+
+# Option to run the CLI from a local volume
+if [ "$CLI_DEV" != "1" ]; then
+	./cli/spinner.sh \
+		"Pulling latest platform image..." \
+		bash -c \
+			"docker pull registry.gitlab.com/pabloortiz132/pablo-platform/platform | \
+			grep 'Image is up to date' \
+			&>/dev/null"
+
+    if [ $? -eq 0 ];then
+        echo -e "\e[32m✔\e[0m platform image is up-to-date.                \033[0m"
+    else
+        echo -e "\e[34mℹ️ Downloaded newest platform image.                   \e[0m"
+    fi
+
+	cliMount=""
+    entrypointArg=""
+else
+	cliMount="-v $PWD/../pablo-platform/cli:/project/cli"
+    entrypointArg="--entrypoint /project/cli/bash/entrypoint.sh" # Use mounted entrypoint instead of bundled one
+fi
+
+PASSWORD='1234'
+if [ -f './secrets/password.key' ]; then
+    PASSWORD=$(cat ./secrets/password.key )
+fi
+
+docker run \
+	--rm \
+    --name homepanel-$$ \
+	$ttyMode \
+	$entrypointArg \
+	--user $(id -u):$(stat -c %g /var/run/docker.sock) \
+	-v $PWD:/project \
+	$cliMount \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v ~/.ssh:/home/node/.ssh \
+	-e PROJECT_DIR=$PWD \
+	-e CI_MODE \
+	-e CLI_DEV \
+	-e PASSWORD=$PASSWORD \
+	--network host \
+	registry.gitlab.com/pabloortiz132/pablo-platform/platform \
+	$@

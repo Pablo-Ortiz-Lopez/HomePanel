@@ -1,0 +1,99 @@
+
+(rules PCB dimmer
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 615)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.5)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.7)
+    )
+  )
+  (rule
+    (width 250.0)
+    (clear 200.0)
+    (clear 125.0 (type smd_to_turn_gap))
+    (clear 1000.0 (type default-AC))
+    (clear 50.0 (type smd-smd))
+    (clear 1000.0 (type smd-AC))
+    (clear 1000.0 (type "kicad_default"-AC))
+    (clear 1000.0 (type AC-AC))
+  )
+  (padstack "Via[0-1]_800:400_um"
+    (shape
+      (circle F.Cu 800.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 800.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_800:400_um" "Via[0-1]_800:400_um" default
+  )
+  (via 
+    "Via[0-1]_800:400_um-kicad_default" "Via[0-1]_800:400_um" "kicad_default"
+  )
+  (via 
+    "Via[0-1]_800:400_um-AC" "Via[0-1]_800:400_um" AC
+  )
+  (via_rule
+    default "Via[0-1]_800:400_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_800:400_um-kicad_default"
+  )
+  (via_rule
+    AC "Via[0-1]_800:400_um-AC"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    +3.3V /EN /REST /GPIO0 /GPIO2 GND /GPIO15 /RX
+    /TX +5V /ADC /GPIO16 /GPIO14 /GPIO12 /GPIO13 /GPIO4
+    /GPIO5 "unconnected-(U1-CS0-Pad17)" "unconnected-(U1-MISO-Pad18)" "unconnected-(U1-GPIO9-Pad19)" "unconnected-(U1-GPIO10-Pad20)" "unconnected-(U1-MOSI-Pad21)" "unconnected-(U1-SCLK-Pad22)"
+    (clearance_class "kicad_default")
+    (via_rule "kicad_default")
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class AC
+    NEUT LAMP AC
+    (clearance_class AC)
+    (via_rule AC)
+    (rule
+      (width 1500.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)

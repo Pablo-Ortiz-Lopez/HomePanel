@@ -1,0 +1,13 @@
+version: '2.0'
+services:
+  homekit_lowcode:
+    restart: always
+    container_name: homekit_lowcode
+    image: registry.gitlab.com/pabloortiz132/pablo-platform/lowcode
+    build: ${PROJECT_DIR}/stacks/homekit/lowcode
+    environment:
+      - TZ=Europe/Madrid
+    network_mode: 'host'
+    volumes:
+      - ${PROJECT_DIR}/stacks/homekit/lowcode:/data
+    entrypoint: /data/entrypoint.sh

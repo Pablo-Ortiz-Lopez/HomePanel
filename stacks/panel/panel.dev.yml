@@ -1,0 +1,13 @@
+version: '2.0'
+services:
+  esphome:
+    container_name: esphome
+    restart: always
+    image: esphome/esphome:2023.3
+    volumes:
+      - ${PROJECT_DIR}/stacks/panel/esphome/config:/config
+      - ${PROJECT_DIR}/stacks/panel/esphome/tweaks/components/mitsubishi:/esphome/esphome/components/mitsubishi
+      - ${PROJECT_DIR}/stacks/panel/esphome/tweaks/components/remote_receiver/remote_receiver.h:/esphome/esphome/components/remote_receiver/remote_receiver.h
+      - ${PROJECT_DIR}/stacks/panel/esphome/tweaks/dashboard.py:/esphome/esphome/dashboard/dashboard.py
+    network_mode: 'host'
+    command: dashboard --username pabloortiz132 --password '${PASSWORD}' /config
