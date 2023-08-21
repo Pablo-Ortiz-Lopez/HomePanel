@@ -7,7 +7,7 @@
 RCSwitch mySwitch = RCSwitch();
 
 bool pulseALast = 0;
-bool buttonWasPressed = 0;
+bool buttonReadLast = 0;
 uint8_t messageID = 0;
 
 void signMessage(const char* message, char* result) {
@@ -22,10 +22,8 @@ void signMessage(const char* message, char* result) {
     }
   }
   
-  // Copy the characters from str2 to result
-  while (*message) {
-    result[index] = *message;
-    message++;
+  for (int i = 0; i < 13; i++) {
+    result[index] = message[i];
     index++;
   }
 }
@@ -50,7 +48,6 @@ void sendState(bool clockwise, bool buttonPressed){
   mySwitch.send(message);
   messageID = (messageID + 1) % 8;
   delay(11);
-
 }
 
 void setup() {
@@ -61,6 +58,7 @@ void setup() {
   
   mySwitch.enableTransmit(TX);
   mySwitch.setRepeatTransmit (4);
+  mySwitch.setProtocol(1);
 }
 
 void loop() {
@@ -74,9 +72,10 @@ void loop() {
       sendState(false, false); // Counter-Clockwise
     }
   }
-  if(!buttonRead && !buttonWasPressed){
+  if(!buttonRead && buttonReadLast){
     sendState(false, true); // Button Press
+    delay(300);
   }
-  buttonWasPressed = !buttonRead;
+  buttonReadLast = buttonRead;
   pulseALast = pulseARead;
 }
