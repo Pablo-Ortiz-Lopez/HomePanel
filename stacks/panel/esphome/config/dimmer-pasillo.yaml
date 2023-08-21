@@ -49,7 +49,7 @@ remote_receiver:
   on_rc_switch:
     - lambda: |-
         static uint8_t lastID = 255;
-        ESP_LOGD("custom", "RAWCode: %d Protocol: %d", x.code, x.protocol);
+        ESP_LOGD("custom", "RAWCode: %X Protocol: %d", x.code, x.protocol);
         uint8_t messageID = (x.code >> 10) & 0x7;
         uint16_t code = x.code & 0x3FF;
 
