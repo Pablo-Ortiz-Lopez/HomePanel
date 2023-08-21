@@ -46,40 +46,41 @@ remote_receiver:
   tolerance: 20%
   pin: 
     number: GPIO14
+  on_rc_switch:
+    - lambda: |-
+        static uint8_t lastID = 255;
+        ESP_LOGD("custom", "RAWCode: %d Protocol: %d", x.code, x.protocol);
+        uint8_t messageID = (x.code >> 10) & 0x7;
+        uint16_t code = x.code & 0x3FF;
+
+        if(lastID != messageID){
+          ESP_LOGD("custom", "ID: %X, Code: %X", messageID, code);
+          if(code == 0x59){
+            id(light_1).toggle();
+          }else if(code == 0x66){
+            id(rf_action_increase).publish_state(true);
+            id(rf_action_increase).publish_state(false);
+          }else if(code == 0x73){
+            id(rf_action_decrease).publish_state(true);
+            id(rf_action_decrease).publish_state(false);
+          }
+          lastID = messageID;
+        }
 
 binary_sensor:
-  - platform: remote_receiver
-    name: rf_action_button
-    rc_switch_raw:
-      code: "0001001101"
-      protocol: 1
+  - platform: template
+    id: rf_action_increase
     on_press:
       then:
-        # Toggles the lamp
-        - light.toggle:
-            id: light_1
-        - logger.log: "Received code for toggling state"
-  - platform: remote_receiver
-    name: rf_action_increase
-    rc_switch_raw:
-      code: "0001010101"
-      protocol: 1
-    on_press:
-      then:   
-        # Increases the brightness by 5%
         - light.dim_relative:
             id: light_1
-            relative_brightness: 5%
+            relative_brightness: 10%
         - logger.log: "Received code for increasing brightness"
-  - platform: remote_receiver
-    name: rf_action_decrease
-    rc_switch_raw:
-      code: "0001011101"
-      protocol: 1
+  - platform: template
+    id: rf_action_decrease
     on_press:
-      then:   
-        # Decreases the brightness by 5%
+      then:
         - light.dim_relative:
             id: light_1
-            relative_brightness: -5%
+            relative_brightness: -10%
         - logger.log: "Received code for decreasing brightness"
