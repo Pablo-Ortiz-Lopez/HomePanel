@@ -5,10 +5,14 @@
   (paper "A4")
 
   (title_block
-    (title "Temperature Controller")
+    (title "Climate Controller")
     (date "2022-09-05")
     (rev "v2.0.0")
     (company "Pablo Ortiz")
+    (comment 1 "ortizma.com")
+    (comment 2 "Controls the Temperature and monitors the air quality in a room")
+    (comment 3 "Supports CO2 Readings via Serial")
+    (comment 4 "Supports controlling Climate units via IR and a relay")
   )
 
   (lib_symbols
@@ -2168,7 +2172,7 @@
     (pin "1" (uuid a8db8301-b017-4193-ad04-7fad23610fbd))
     (pin "2" (uuid cd1ccbcc-237e-4b3a-8a8f-503595537b6c))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "D2") (unit 1)
         )
@@ -2193,7 +2197,7 @@
     )
     (pin "1" (uuid bc2bd2b7-d4f2-4818-9417-b8b5c06c06fc))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR03") (unit 1)
         )
@@ -2218,7 +2222,7 @@
     )
     (pin "1" (uuid 490ea36f-7ae2-4b9f-9692-6889c0cfbb79))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR0107") (unit 1)
         )
@@ -2264,7 +2268,7 @@
     (pin "8" (uuid 46bf1cfa-5298-4495-bfbb-74c00d25bb25))
     (pin "9" (uuid 65a794f2-f271-44c3-9664-f44e8ce336de))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "U2") (unit 1)
         )
@@ -2290,7 +2294,7 @@
     (pin "1" (uuid fe753bce-fe3a-4b1d-b0a1-7b3784bf926c))
     (pin "2" (uuid dc370eba-f05d-4fb4-b798-89af51e41263))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "R7") (unit 1)
         )
@@ -2320,7 +2324,7 @@
     (pin "5" (uuid c410afbd-6562-4674-a6c6-498c37f2b219))
     (pin "6" (uuid 5205100c-bd9a-4a77-95e7-c33c1b1acf1f))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "J4") (unit 1)
         )
@@ -2345,7 +2349,7 @@
     )
     (pin "1" (uuid 1fdc1b71-f330-4bee-b1f6-bc6a0bea33da))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR015") (unit 1)
         )
@@ -2370,7 +2374,7 @@
     )
     (pin "1" (uuid ead30255-df9f-4db2-a289-81ce267150e8))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR0106") (unit 1)
         )
@@ -2395,7 +2399,7 @@
     )
     (pin "1" (uuid 50bb53a6-8015-47e6-a580-4e73486352a8))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR0102") (unit 1)
         )
@@ -2425,7 +2429,7 @@
     (pin "5" (uuid 05faceb3-5405-4f59-a3fc-af43cbbc5c21))
     (pin "6" (uuid 5f01b8ee-6459-4e78-bad7-d7c76a098c00))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "J3") (unit 1)
         )
@@ -2450,7 +2454,7 @@
     )
     (pin "1" (uuid 4d0fb325-3a23-4a46-8f1b-853acf3570db))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR011") (unit 1)
         )
@@ -2477,7 +2481,7 @@
     (pin "2" (uuid cca72bb4-0542-4850-bfa1-9c6d661add4b))
     (pin "3" (uuid 2377a207-3e85-427b-9da3-0e1ef7601faa))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "J2") (unit 1)
         )
@@ -2503,7 +2507,7 @@
     (pin "1" (uuid 78e7410b-0155-42ea-b72f-e10cf6bd2673))
     (pin "2" (uuid fc81425c-3321-4a7e-91a9-349a0d643980))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "C2") (unit 1)
         )
@@ -2528,7 +2532,7 @@
     )
     (pin "1" (uuid 472ccd12-7c7c-465c-a517-8354ab917173))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR02") (unit 1)
         )
@@ -2555,7 +2559,7 @@
     (pin "2" (uuid 43ef0859-9361-44bc-aad5-0bf071a153e3))
     (pin "3" (uuid c9c1786b-a7c9-4559-a16d-062ad509a668))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "J5") (unit 1)
         )
@@ -2580,7 +2584,7 @@
     )
     (pin "1" (uuid e50797c7-a8d0-4936-a4c9-9e5bd6cccfa7))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR017") (unit 1)
         )
@@ -2605,7 +2609,7 @@
     )
     (pin "1" (uuid 7164f8fe-1074-463f-abc9-c13cafc5f17a))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR018") (unit 1)
         )
@@ -2630,7 +2634,7 @@
     )
     (pin "1" (uuid 7fe371fa-b063-4ad4-bf2f-c0f210018a6d))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR0105") (unit 1)
         )
@@ -2655,7 +2659,7 @@
     )
     (pin "1" (uuid 2ac1aa4d-5845-45d6-b64e-c2ded16cee14))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR06") (unit 1)
         )
@@ -2681,7 +2685,7 @@
     (pin "1" (uuid 25d41fe8-513b-4d2e-9ae0-24e29bfd820a))
     (pin "2" (uuid 8b7d3557-c5ba-493a-89c8-61b87a63025c))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "R6") (unit 1)
         )
@@ -2707,7 +2711,7 @@
     (pin "1" (uuid e0ed1d2a-33f4-42ab-a095-f723704b0dd2))
     (pin "2" (uuid 297329ce-7172-4454-ad6d-668974ed20a1))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "D1") (unit 1)
         )
@@ -2733,7 +2737,7 @@
     (pin "1" (uuid 579a6585-7b9a-44c9-ba67-aabf4f1f8f4c))
     (pin "2" (uuid 9669b546-b056-4977-873b-d1fc8a8653d0))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "R1") (unit 1)
         )
@@ -2759,7 +2763,7 @@
     (pin "1" (uuid 542d5002-2017-471d-b497-2f503cfb6d01))
     (pin "2" (uuid a691a372-ab50-436b-aaec-8be8c7a47f5e))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "R5") (unit 1)
         )
@@ -2784,7 +2788,7 @@
     )
     (pin "1" (uuid b6f5f3bb-8df8-4c63-b334-eb26dff40456))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR014") (unit 1)
         )
@@ -2809,7 +2813,7 @@
     )
     (pin "1" (uuid 79dcffd0-eba5-4267-a9d4-b98f4e6a37f0))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR016") (unit 1)
         )
@@ -2841,7 +2845,7 @@
     (pin "7" (uuid f66c031c-69e4-4ebb-a33f-e9e8efcb0da8))
     (pin "8" (uuid 0cc79406-27ef-4532-95ea-e21b43d465e7))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "J1") (unit 1)
         )
@@ -2867,7 +2871,7 @@
     (pin "1" (uuid 20756d5b-1a57-492b-b133-ffc4de8b3be4))
     (pin "2" (uuid 96d7d8a9-609f-4c98-86ff-1021f38e886b))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "R2") (unit 1)
         )
@@ -2892,7 +2896,7 @@
     )
     (pin "1" (uuid e1bc54b7-6e90-4d93-8d9b-12cdd62416cc))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR0108") (unit 1)
         )
@@ -2918,7 +2922,7 @@
     (pin "1" (uuid 379d12aa-987f-423f-ba46-e132cf20c74e))
     (pin "2" (uuid 0d3aaad3-0634-4a26-ae0a-a7c1e6277b56))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "R4") (unit 1)
         )
@@ -2945,7 +2949,7 @@
     (pin "2" (uuid 1eddd757-0d2f-44c5-815e-8d696ecabf6d))
     (pin "3" (uuid 0ac15137-3293-4631-9454-55c2c6089fb0))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "U3") (unit 1)
         )
@@ -2971,7 +2975,7 @@
     (pin "1" (uuid 67011d6f-f1dd-484d-9158-e58110f3b3f7))
     (pin "2" (uuid 90a4a26f-3919-403d-8364-52b72f68bf9b))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "R3") (unit 1)
         )
@@ -2997,7 +3001,7 @@
     (pin "1" (uuid adbdd7e6-eeb1-4212-8195-1fdcff39edd6))
     (pin "2" (uuid 5225df25-aad7-4257-b379-909ca6bcedf0))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "C3") (unit 1)
         )
@@ -3022,7 +3026,7 @@
     )
     (pin "1" (uuid 0c312684-37f3-4576-a55e-7601164ae61f))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR01") (unit 1)
         )
@@ -3050,7 +3054,7 @@
     (pin "3" (uuid 9d56f439-07e4-4ffb-aa10-388382a51463))
     (pin "4" (uuid cc1b37ca-b041-463d-bc7f-064943e0d77b))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "U1") (unit 1)
         )
@@ -3076,7 +3080,7 @@
     (pin "1" (uuid 02f6a6ca-d4df-4cd7-9d61-7a63572f1ad8))
     (pin "2" (uuid ae547fa4-b273-4308-9f58-7fc10ecad372))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "C1") (unit 1)
         )
@@ -3101,7 +3105,7 @@
     )
     (pin "1" (uuid 5b031e1a-619d-47f4-90b4-4e0ec6eadfe3))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR021") (unit 1)
         )
@@ -3128,7 +3132,7 @@
     (pin "2" (uuid 454ef469-c25a-4932-b82e-1c59cb943b0f))
     (pin "3" (uuid c3d08017-521d-4d62-ae7e-ae9347c1159e))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "Q1") (unit 1)
         )
@@ -3153,7 +3157,7 @@
     )
     (pin "1" (uuid 4d7ba533-8e09-4ce6-be70-8f9e89806a6c))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR0103") (unit 1)
         )
@@ -3178,7 +3182,7 @@
     )
     (pin "1" (uuid 3e77dd30-5b4b-48d2-9f64-bae174c0f701))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR08") (unit 1)
         )
@@ -3203,7 +3207,7 @@
     )
     (pin "1" (uuid 79dfc9ed-f511-451d-b78a-759e239d1278))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR0104") (unit 1)
         )
@@ -3228,7 +3232,7 @@
     )
     (pin "1" (uuid b6c9045d-86a6-44aa-a418-ce3676691080))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR0101") (unit 1)
         )
@@ -3253,7 +3257,7 @@
     )
     (pin "1" (uuid e18e0d22-eb2f-463b-bbe5-26e5186ab3df))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR04") (unit 1)
         )
@@ -3278,7 +3282,7 @@
     )
     (pin "1" (uuid a4bb228d-af60-4330-b260-1c035010e085))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR010") (unit 1)
         )
@@ -3310,7 +3314,7 @@
     (pin "A1" (uuid 606fa8d1-8b3a-4ac5-bb95-5b2f05f54a8a))
     (pin "A2" (uuid 27611891-c220-418d-9063-0f63e7984f64))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "K1") (unit 1)
         )
@@ -3335,7 +3339,7 @@
     )
     (pin "1" (uuid 13726ac6-2124-4e9e-99aa-dc224dcd534b))
     (instances
-      (project "ac-control"
+      (project "ClimateController"
         (path "/3d8b4ce2-7f39-402d-99e1-eee55263149f"
           (reference "#PWR05") (unit 1)
         )

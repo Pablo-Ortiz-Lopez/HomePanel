@@ -469,7 +469,7 @@
     "last_paths": {
       "gencad": "",
       "idf": "",
-      "netlist": "dimmer.net",
+      "netlist": "LightDimmer.net",
       "specctra_dsn": "dimmer.dsn",
       "step": "",
       "vrml": ""
