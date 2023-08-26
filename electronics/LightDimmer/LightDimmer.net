@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "C:\\Users\\pablo\\OneDrive\\Proyectos\\HomePanel\\electronics\\LightDimmer\\LightDimmer.kicad_sch")
-    (date "24/08/2023 20:03:25")
+    (date "26/08/2023 18:48:54")
     (tool "Eeschema 7.0.6")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -179,7 +179,7 @@
       (tstamps "9b80ece6-7d3f-49eb-a052-2cdd24abe0b6"))
     (comp (ref "U2")
       (value "ESP-12F")
-      (footprint "AA_Footprints:ESP-12E_SMD")
+      (footprint "AA_Footprints:ESP-12E_SMD_Simple")
       (datasheet "http://l0l.org.uk/2014/12/esp8266-modules-hardware-guide-gotta-catch-em-all/")
       (libsource (lib "ESP8266") (part "ESP-12F") (description "ESP8266 ESP-12E module, 22 pins, 2mm, PCB antenna"))
       (property (name "Sheetname") (value ""))

@@ -2587,7 +2587,7 @@
     (property "Value" "ESP-12F" (at 104.14 25.4 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "AA_Footprints:ESP-12E_SMD" (at 104.14 41.91 0)
+    (property "Footprint" "AA_Footprints:ESP-12E_SMD_Simple" (at 104.14 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "http://l0l.org.uk/2014/12/esp8266-modules-hardware-guide-gotta-catch-em-all/" (at 104.14 41.91 0)
