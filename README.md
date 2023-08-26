@@ -55,6 +55,7 @@ To update the firmware OTA:
    
 > Note that the first time you will need to flash ESPHome to your device using Serial. Contact me or check out my blog for more information on this.
 
+> Some devices, namely the LightController, are powered by an Atmega328P microcontroller. Those devices don't use ESPHome, and instead rely on Arduino IDE to flash their firmware via ICSP.
 ## Additional Information
 
 For more details about the project, you can visit my blog at [ortizma.com](https://ortizma.com). If you have any questions, issues, or suggestions, feel free to contact me directly at [pabloortiz132@gmail.com](mailto:pabloortiz132@gmail.com).
