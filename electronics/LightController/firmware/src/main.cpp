@@ -1,9 +1,11 @@
+#include <Arduino.h>
+#include "RCSwitch.h"
+
 #define CLK 3
 #define PULSE 4
 #define BUTTON 5
 #define TX 2
 
-#include <RCSwitch.h>
 RCSwitch mySwitch = RCSwitch();
 
 bool pulseALast = 0;
