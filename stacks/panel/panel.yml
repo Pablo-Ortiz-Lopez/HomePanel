@@ -1,12 +1,4 @@
 version: '2.0'
-networks:
-  default:
-      driver: bridge
-      ipam:
-          driver: default
-          config:
-              - subnet: "172.33.0.0/24"
-                gateway: "172.33.0.1"
 services:
   homeassistant:
     container_name: homeassistant
