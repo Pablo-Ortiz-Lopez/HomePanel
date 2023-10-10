@@ -5,8 +5,8 @@ networks:
       ipam:
           driver: default
           config:
-              - subnet: "172.0.0.0/8"
-                gateway: "172.0.0.1"
+              - subnet: "172.33.0.0/24"
+                gateway: "172.33.0.1"
 services:
   homeassistant:
     container_name: homeassistant
