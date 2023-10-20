@@ -6,8 +6,6 @@ The project includes a variety of custom hardware, along with an ESPHome + HomeA
 
 Firmware for these devices is powered by ESPHome, enabling seamless over-the-air (OTA) updates to enhance and expand functionality.
 
-> NOTE: There is a Node-RED custom integration with Homekit, which is deprecated in favor of the Home Assistant integration.
-
 ## Getting Started
 
 To set up and run the Home Automation Project, follow these steps:

@@ -2,7 +2,7 @@ version: '2.0'
 services:
   homeassistant:
     container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    image: "ghcr.io/home-assistant/home-assistant:2023.10"
     volumes:
       - ${PROJECT_DIR}/stacks/panel/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
