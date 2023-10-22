@@ -1,0 +1,9 @@
+[submodule "devices/ClimateController"]
+	path = devices/ClimateController
+	url = git@github.com:Pablo-Ortiz-Lopez/ClimateController.git
+[submodule "devices/LightDimmer"]
+	path = devices/LightDimmer
+	url = git@github.com:Pablo-Ortiz-Lopez/LightDimmer.git
+[submodule "devices/LightController"]
+	path = devices/LightController
+	url = git@github.com:Pablo-Ortiz-Lopez/LightController.git
