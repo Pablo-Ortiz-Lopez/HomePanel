@@ -1,0 +1,14 @@
+version: '2.0'
+services:
+  esphome:
+    container_name: esphome
+    restart: always
+    image: esphome/esphome:2023.3
+    volumes:
+      - ./esphome/config:/config
+      - ./esphome/tweaks/components/mitsubishi:/esphome/esphome/components/mitsubishi
+      - ./esphome/tweaks/components/remote_receiver/remote_receiver.h:/esphome/esphome/components/remote_receiver/remote_receiver.h
+      - ./esphome/tweaks/dashboard.py:/esphome/esphome/dashboard/dashboard.py
+    ports:
+      - 80:6052
+    command: dashboard --username windows --password '12345' /config
