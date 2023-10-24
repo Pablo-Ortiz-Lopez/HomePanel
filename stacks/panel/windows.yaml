@@ -11,4 +11,4 @@ services:
       - ./esphome/tweaks/dashboard.py:/esphome/esphome/dashboard/dashboard.py
     ports:
       - 80:6052
-    command: dashboard --username windows --password '12345' /config
+    command: dashboard --username windows --password '1234' /config
