@@ -13,6 +13,7 @@ esac
 if [ "$machine" = "MinGw" ];then
 	echo "You are using Windows. Only ESPHome will be started. The username is 'windows' and the password is '1234'"
 	docker compose -f stacks/panel/windows.yaml up
+	exit 0
 elif [ "$machine" != "Linux" ];then
 	echo "UNSUPPORTED MACHINE: $machine"
 	exit 1
