@@ -40,8 +40,26 @@ i2c:
 sensor:
   - platform: mqtt_subscribe
     name: "Comedor Temperature"
-    id: temperature
+    id: comedor_temperature
     topic: comedor-ac/sensor/comedor_temperature/state
+
+  - platform: mqtt_subscribe
+    name: "Room Temperature"
+    id: room_temperature
+    topic: room-climate/sensor/temperature/state
+  
+  - platform: template
+    name: "Average Temperature"
+    id: temperature
+    lambda: |-
+      if(id(comedor_temperature).has_state() && id(room_temperature).has_state() ){
+        return (id(comedor_temperature).state + id(room_temperature).state) / 2;
+        // return std::min(id(comedor_temperature).state, id(room_temperature).state);
+      }else if(id(comedor_temperature).has_state()){
+        return id(comedor_temperature).state;
+      }else{
+        return id(room_temperature).state;
+      }
 
   - platform: mqtt_subscribe
     name: "Comedor Humidity"
