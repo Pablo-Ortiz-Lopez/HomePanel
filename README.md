@@ -22,7 +22,7 @@ To set up and run the Home Automation Project, follow these steps:
 3. **Start the Panels:** To launch HomeAssistant + ESPHome, run:
 
    ```
-   ./system start panel
+   ./system start
    ```
 > If you don't need ESPHome, you can run this command with the --prod flag.
 > 

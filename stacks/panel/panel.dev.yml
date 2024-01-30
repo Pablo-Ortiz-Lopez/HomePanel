@@ -10,4 +10,4 @@ services:
       - ${PROJECT_DIR}/stacks/panel/esphome/tweaks/components/remote_receiver/remote_receiver.h:/esphome/esphome/components/remote_receiver/remote_receiver.h
       - ${PROJECT_DIR}/stacks/panel/esphome/tweaks/dashboard.py:/esphome/esphome/dashboard/dashboard.py
     network_mode: 'host'
-    command: dashboard --username pabloortiz132 --password '${PASSWORD}' /config
+    command: dashboard --username esphome --password '${ESPHOME_PASSWORD}' /config
