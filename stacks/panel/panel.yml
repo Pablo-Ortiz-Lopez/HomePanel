@@ -2,10 +2,12 @@ version: '2.0'
 services:
   homeassistant:
     container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:2023.10"
+    image: "ghcr.io/home-assistant/home-assistant:2024.1"
     volumes:
       - ${PROJECT_DIR}/stacks/panel/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
     restart: always
+    healthcheck: 
+      test: "curl http://localhost:8123 || exit 1"
     privileged: true
     network_mode: host
